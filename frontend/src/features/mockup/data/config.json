@@ -1,0 +1,61 @@
+{
+    "activeIndustry": "shipping",
+    "watermark": "Orionex",
+    "brand": {
+        "productName": "AutoInsight",
+        "tagline": "Any file in. Insights out.",
+        "cta": "Visit orionex.id"
+    },
+    "scenes": [
+        { "id": 1, "key": "problem", "name": "The Problem", "duration": 8000 },
+        { "id": 2, "key": "upload", "name": "Upload Any File", "duration": 12000 },
+        { "id": 3, "key": "pipeline", "name": "Data Pipeline", "duration": 18000 },
+        { "id": 4, "key": "dashboard", "name": "Dashboard Generation", "duration": 18000 },
+        { "id": 5, "key": "chat", "name": "Chat with Data", "duration": 20000 },
+        { "id": 6, "key": "recommendations", "name": "Recommendations", "duration": 12000 },
+        { "id": 7, "key": "closing", "name": "Closing", "duration": 4000 }
+    ],
+    "explore": {
+        "inactivityTimeoutMs": 30000
+    },
+    "copy": {
+        "problemTagline": "Your business data is everywhere. But nowhere.",
+        "pipelineCallout": "Every step is visible. No black box.",
+        "dashboardAnnotation": "From 15 hours of manual reporting — to this.",
+        "causalCallout": "Not just correlation — causation.",
+        "closingTagline": "Any file in. Insights out."
+    },
+    "uploadFiles": [
+        { "name": "invoice_SUPPLIER_2026.pdf", "type": "pdf" },
+        { "name": "receipt_scan.jpg", "type": "image" },
+        { "name": "vessel_daily_log.xlsx", "type": "excel" },
+        { "name": "contract_addendum.docx", "type": "word" }
+    ],
+    "dataSources": ["Database", "Airtable", "URL import", "Email ingestion"],
+    "pipelineStages": [
+        {
+            "key": "ocr",
+            "label": "OCR & Extraction",
+            "status": "4 files → 127 rows extracted",
+            "detail": "Layout-Aware OCR: tables preserved, tax IDs extracted"
+        },
+        {
+            "key": "sanitation",
+            "label": "Data Sanitation",
+            "status": "0 errors, 3 warnings handled",
+            "detail": "Deduplication, outlier detection, null handling"
+        },
+        {
+            "key": "structuring",
+            "label": "Structuring",
+            "status": "Vendor, Date, Amount, Tax ID",
+            "detail": "Auto-map to canonical schema, enforce types"
+        },
+        {
+            "key": "processing",
+            "label": "Processing Pipeline",
+            "status": "User-configured transforms applied",
+            "detail": "Aggregations, joins, enrichment, causal features"
+        }
+    ]
+}

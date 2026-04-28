@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        -webkit-tap-highlight-color: transparent;
+    }
+    body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        color: theme('colors.orionDark');
+        background-color: theme('colors.orionSurface');
+    }
+}
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}

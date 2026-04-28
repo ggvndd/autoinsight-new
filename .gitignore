@@ -1,0 +1,10 @@
+.DS_Store
+.playwright-mcp/
+.vscode/
+.env
+.env.*
+node_modules/
+dist/
+build/
+coverage/
+*.log

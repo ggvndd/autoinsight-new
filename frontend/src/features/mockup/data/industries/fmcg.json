@@ -1,0 +1,107 @@
+{
+    "key": "fmcg",
+    "displayName": "FMCG",
+    "context": "Indonesian consumer goods distributor across 5 DCs.",
+    "kpis": [
+        { "label": "Stockout Rate", "value": "8.3%", "delta": "+2.1pp", "tone": "negative" },
+        { "label": "Sell-Through", "value": "74%", "delta": "-3%", "tone": "negative" },
+        { "label": "Trade Spend ROI", "value": "2.4x", "delta": "+0.3x", "tone": "positive" },
+        { "label": "On-Time In-Full", "value": "81%", "delta": "-5pp", "tone": "negative" }
+    ],
+    "primaryChart": {
+        "type": "bar",
+        "title": "Weekly Sell-Out by Top SKU",
+        "xLabels": ["SKU-47", "SKU-22", "SKU-11", "SKU-63", "SKU-08"],
+        "series": [
+            {
+                "label": "Sell-Out Volume",
+                "data": [182, 134, 119, 98, 87],
+                "highlight": [0]
+            }
+        ],
+        "unit": "k units"
+    },
+    "secondaryChart": {
+        "type": "stackedBar",
+        "title": "OTIF by Distribution Center",
+        "xLabels": ["Bekasi", "Surabaya", "Medan", "Makassar", "Semarang"],
+        "series": [
+            {
+                "label": "On-Time In-Full",
+                "data": [86, 61, 79, 82, 80],
+                "highlight": [1]
+            },
+            {
+                "label": "Late",
+                "data": [9, 24, 13, 11, 12],
+                "highlight": [1]
+            },
+            {
+                "label": "Short Fill",
+                "data": [5, 15, 8, 7, 8],
+                "highlight": [1]
+            }
+        ],
+        "unit": "%"
+    },
+    "mapTitle": "National Distribution Footprint",
+    "mapPoints": [
+        { "name": "Bekasi DC", "lat": -6.2, "lng": 107.0, "weight": 0.94, "highlight": false },
+        { "name": "Surabaya DC", "lat": -7.3, "lng": 112.7, "weight": 0.99, "highlight": true },
+        { "name": "Medan DC", "lat": 3.6, "lng": 98.7, "weight": 0.73, "highlight": false },
+        { "name": "Makassar DC", "lat": -5.1, "lng": 119.4, "weight": 0.69, "highlight": false },
+        { "name": "Semarang DC", "lat": -7.0, "lng": 110.4, "weight": 0.77, "highlight": false },
+        { "name": "Denpasar DC", "lat": -8.7, "lng": 115.2, "weight": 0.55, "highlight": false },
+        { "name": "Balikpapan DC", "lat": -1.3, "lng": 116.8, "weight": 0.58, "highlight": false },
+        { "name": "Palembang DC", "lat": -3.0, "lng": 104.8, "weight": 0.52, "highlight": false }
+    ],
+    "table": {
+        "columns": ["SKU", "DC", "Region", "Units", "Fill Rate", "Days to Stockout"],
+        "rows": [
+            ["SKU-47", "Surabaya", "East Java", "184000", "61%", "2"],
+            ["SKU-22", "Semarang", "Central Java", "136000", "79%", "5"],
+            ["SKU-11", "Bekasi", "West Java", "121000", "86%", "7"],
+            ["SKU-63", "Makassar", "South Sulawesi", "99000", "82%", "4"],
+            ["SKU-08", "Medan", "North Sumatra", "88000", "81%", "8"]
+        ]
+    },
+    "dashboardAnnotation": "From disconnected distributor reports to one live demand picture.",
+    "chatScripts": [
+        {
+            "userQuery": "Why did SKU-47 stockouts spike in East Java?",
+            "aiResponse": "SKU-47 stockouts in East Java increased 340% in the last 3 weeks. Root cause analysis shows two factors: a 22% demand surge from a competitor OOS event starting April 3rd, and the Surabaya DC fill rate dropping to 61% due to a supplier shipment delay of 8 days on raw material batch #R-2247.",
+            "highlightTargets": ["sku-47-bar", "surabaya-dc", "east-java-region"],
+            "followUps": ["What's the replenishment timeline?", "Show all DC stockout risks", "Compare SKU-47 vs SKU-22"]
+        },
+        {
+            "userQuery": "What's the replenishment timeline?",
+            "aiResponse": "Batch #R-2247 is now inbound and arrives in 2 days. Emergency co-packing starts the same night, so Surabaya DC fill rate should recover from 61% to 82% by day 3 and reach 95% by day 5. East Java backorders are projected to normalize within 7 days.",
+            "highlightTargets": ["surabaya-dc", "sku-47-bar"]
+        },
+        {
+            "userQuery": "Show all DC stockout risks",
+            "aiResponse": "10-day stockout risk by DC: Surabaya 92% (SKU-47, 2 days cover), Makassar 64% (SKU-63, 4 days), Semarang 48% (SKU-22, 5 days), Bekasi 31% (SKU-11, 7 days), and Medan 27% (SKU-08, 8 days). Surabaya remains critical because East Java demand is still 22% above baseline.",
+            "highlightTargets": ["surabaya-dc", "east-java-region"]
+        }
+    ],
+    "recommendations": [
+        {
+            "priority": "High",
+            "headline": "Emergency replenishment order for SKU-47 at Surabaya DC",
+            "impact": "Recover 61% → 95% fill rate within 5 days",
+            "rationale": "Based on: 8-day supplier delay and 340% demand spike pattern"
+        },
+        {
+            "priority": "High",
+            "headline": "Activate safety stock protocol for East Java region",
+            "impact": "Prevent IDR 4.2B revenue loss",
+            "rationale": "Based on: historical stockout-to-lost-sales conversion rate of 68%"
+        },
+        {
+            "priority": "Medium",
+            "headline": "Diversify supplier base for SKU-47 raw materials",
+            "impact": "Reduce single-supplier dependency from 100% to 60%",
+            "rationale": "Based on: batch #R-2247 delay exposing single-source risk"
+        }
+    ]
+}
