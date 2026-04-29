@@ -73,6 +73,37 @@ const ConfidenceBadge = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
     return <span className="flex items-center gap-1 text-[11px] font-bold text-red-600"><AlertTriangle size={14} /> 40%</span>;
 };
 
+const OcrHighlight = ({ top, left, width, height, label, color, delay }: any) => {
+    const colorClasses: Record<string, string> = {
+        emerald: 'border-emerald-500 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-500',
+        amber: 'border-amber-500 bg-amber-500/20 hover:bg-amber-500/30 text-amber-500',
+        orionBlue: 'border-orionBlue bg-orionBlue/20 hover:bg-orionBlue/30 text-orionBlue',
+        purple: 'border-purple-500 bg-purple-500/20 hover:bg-purple-500/30 text-purple-500',
+        pink: 'border-pink-500 bg-pink-500/20 hover:bg-pink-500/30 text-pink-500',
+        cyan: 'border-cyan-500 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-500',
+    };
+    const bgClasses: Record<string, string> = {
+        emerald: 'bg-emerald-500',
+        amber: 'bg-amber-500',
+        orionBlue: 'bg-orionBlue',
+        purple: 'bg-purple-500',
+        pink: 'bg-pink-500',
+        cyan: 'bg-cyan-500',
+    };
+
+    return (
+        <motion.div 
+            initial={{opacity: 0}} 
+            animate={{opacity: 1}} 
+            transition={{delay}} 
+            className={`absolute border-2 rounded animate-pulse cursor-pointer transition-all shadow-sm ${colorClasses[color] || colorClasses.emerald}`}
+            style={{ top, left, width, height }}
+        >
+            <span className={`text-[9px] font-bold text-white px-1.5 py-0.5 rounded shadow absolute -top-4 right-0 ${bgClasses[color] || bgClasses.emerald}`}>{label}</span>
+        </motion.div>
+    );
+};
+
 const Scene4Metadata: React.FC<SceneProps> = () => {
     const [isLoading, setIsLoading] = useState(true);
     const metadata = mockMetadata;
@@ -132,12 +163,15 @@ const Scene4Metadata: React.FC<SceneProps> = () => {
                             <img src={mockupImg} alt="Metadata Document" className="w-full h-auto block" />
                             
                             {/* Extracted Highlight Bounding Boxes */}
-                            <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 1.5}} className="absolute top-[22.5%] left-[40%] border-2 border-emerald-500 bg-emerald-500/20 w-[48%] h-[2.5%] rounded animate-pulse cursor-pointer hover:bg-emerald-500/30 transition-all flex items-center justify-end pr-2 shadow-sm">
-                                <span className="text-[9px] font-bold bg-emerald-500 text-white px-1.5 py-0.5 rounded shadow absolute -top-4 right-0">Nama Data</span>
-                            </motion.div>
-                            <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 1.9}} className="absolute top-[27.5%] left-[40%] border-2 border-amber-500 bg-amber-500/20 w-[35%] h-[2.5%] rounded cursor-pointer hover:bg-amber-500/30 transition-all flex items-center justify-end pr-2 shadow-sm">
-                                <span className="text-[9px] font-bold bg-amber-500 text-white px-1.5 py-0.5 rounded shadow absolute -top-4 right-0">Instansi</span>
-                            </motion.div>
+                            <OcrHighlight top="38.5%" left="41%" width="40%" height="2%" color="emerald" label="Nama Data" delay={1.5} />
+                            <OcrHighlight top="41%" left="41%" width="10%" height="2%" color="purple" label="Kode" delay={1.7} />
+                            <OcrHighlight top="43.5%" left="41%" width="30%" height="2%" color="amber" label="Instansi" delay={1.9} />
+                            <OcrHighlight top="47.5%" left="41%" width="35%" height="2%" color="cyan" label="Nama DDP" delay={2.1} />
+                            <OcrHighlight top="56.5%" left="41%" width="10%" height="2%" color="pink" label="Tahun" delay={2.3} />
+                            <OcrHighlight top="74%" left="41%" width="45%" height="9%" color="orionBlue" label="Definisi" delay={2.5} />
+                            <OcrHighlight top="86%" left="41%" width="8%" height="2%" color="emerald" label="Ukuran" delay={2.7} />
+                            <OcrHighlight top="88.5%" left="41%" width="8%" height="2%" color="purple" label="Satuan" delay={2.9} />
+                            <OcrHighlight top="95.5%" left="41%" width="30%" height="2%" color="amber" label="Klasifikasi" delay={3.1} />
                         </div>
                     </div>
                 </div>
