@@ -9,15 +9,15 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
-                display: ['Inter', 'sans-serif'],
+                display: ['Montserrat', 'sans-serif'],
             },
             colors: {
-                orionBlue: '#185FA5',
-                orionBlueDeep: '#0F3E6E',
+                orionBlue: '#0030FF',
+                orionBlueDeep: '#0022b3',
                 orionTeal: '#1D9E75',
-                orionDark: '#2C2C2A',
+                orionDark: '#0a0a2a',
                 orionSurface: '#F7F8FA',
-                orionYellow: '#FACC15',
+                orionYellow: '#FFCF00',
             },
             fontSize: {
                 'booth-body': ['18px', { lineHeight: '1.5' }],

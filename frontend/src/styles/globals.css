@@ -16,4 +16,15 @@
 @layer utilities {
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Brand Guide Utilities */
+    .glass-panel {
+        @apply bg-white/60 dark:bg-slate-900/40 backdrop-blur-2xl border border-slate-200/60 dark:border-white/10 shadow-xl;
+    }
+    .glass-card {
+        @apply bg-white/60 dark:bg-slate-900/40 backdrop-blur-2xl border border-slate-200/60 dark:border-white/10 shadow-xl hover:-translate-y-1 hover:shadow-orionBlue/10 hover:border-orionBlue/30 transition-all duration-300;
+    }
+    .glass-morphism-ultra {
+        @apply bg-white/70 dark:bg-slate-900/50 backdrop-blur-3xl shadow-2xl rounded-3xl border border-slate-200/60 dark:border-white/10;
+    }
 }
