@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { mockMetadata } from '../../../mocks/bappenasData';
 import { CheckCircle2, AlertTriangle, Search, Save, FileText } from 'lucide-react';
+import mockupImg from '../../../img/metadata_mockup.png';
 
 interface SceneProps {
     mode: 'explore' | 'loop';
@@ -126,28 +127,16 @@ const Scene4Metadata: React.FC<SceneProps> = () => {
                         </div>
                     </div>
                     {/* Simulated Document content */}
-                    <div className="flex-1 bg-slate-100 p-8 overflow-y-auto no-scrollbar relative">
-                        <div className="bg-white shadow-sm p-10 h-[800px] rounded border border-slate-200">
-                            {/* Fake Skeleton Text */}
-                            <div className="space-y-4 opacity-40 pointer-events-none">
-                                <div className="h-10 bg-slate-300 rounded w-3/4 mb-10"></div>
-                                <div className="h-4 bg-slate-300 rounded w-full"></div>
-                                <div className="h-4 bg-slate-300 rounded w-5/6"></div>
-                                <div className="h-4 bg-slate-300 rounded w-full"></div>
-                                <div className="h-4 bg-slate-300 rounded w-4/6"></div>
-                                
-                                <div className="mt-12 h-48 bg-slate-200 rounded w-full border border-dashed border-slate-400"></div>
-                                
-                                <div className="h-4 bg-slate-300 rounded w-full mt-8"></div>
-                                <div className="h-4 bg-slate-300 rounded w-5/6"></div>
-                            </div>
-
+                    <div className="flex-1 bg-slate-100 p-8 overflow-y-auto no-scrollbar relative flex justify-center">
+                        <div className="relative w-full max-w-[600px] shadow-sm border border-slate-200 rounded overflow-hidden bg-white">
+                            <img src={mockupImg} alt="Metadata Document" className="w-full h-auto block" />
+                            
                             {/* Extracted Highlight Bounding Boxes */}
-                            <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 1.5}} className="absolute top-[160px] left-[50px] border-2 border-emerald-500 bg-emerald-500/10 w-[50%] h-[40px] rounded animate-pulse cursor-pointer hover:bg-emerald-500/20 transition-all flex items-center justify-end pr-2 shadow-sm">
-                                <span className="text-[11px] font-bold bg-emerald-500 text-white px-2 py-0.5 rounded shadow">Nama Data</span>
+                            <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 1.5}} className="absolute top-[22.5%] left-[40%] border-2 border-emerald-500 bg-emerald-500/20 w-[48%] h-[2.5%] rounded animate-pulse cursor-pointer hover:bg-emerald-500/30 transition-all flex items-center justify-end pr-2 shadow-sm">
+                                <span className="text-[9px] font-bold bg-emerald-500 text-white px-1.5 py-0.5 rounded shadow absolute -top-4 right-0">Nama Data</span>
                             </motion.div>
-                            <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 1.9}} className="absolute top-[380px] left-[50px] border-2 border-amber-500 bg-amber-500/10 w-[40%] h-[30px] rounded cursor-pointer hover:bg-amber-500/20 transition-all flex items-center justify-end pr-2 shadow-sm">
-                                <span className="text-[11px] font-bold bg-amber-500 text-white px-2 py-0.5 rounded shadow">Instansi</span>
+                            <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 1.9}} className="absolute top-[27.5%] left-[40%] border-2 border-amber-500 bg-amber-500/20 w-[35%] h-[2.5%] rounded cursor-pointer hover:bg-amber-500/30 transition-all flex items-center justify-end pr-2 shadow-sm">
+                                <span className="text-[9px] font-bold bg-amber-500 text-white px-1.5 py-0.5 rounded shadow absolute -top-4 right-0">Instansi</span>
                             </motion.div>
                         </div>
                     </div>
