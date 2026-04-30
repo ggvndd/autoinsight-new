@@ -10,32 +10,32 @@ interface SceneProps {
 
 function useTypingEffect(text: string, startDelay: number = 0, speed: number = 30) {
     const [displayedText, setDisplayedText] = useState('');
-    
+
     useEffect(() => {
         let isMounted = true;
         let timeout: NodeJS.Timeout;
-        
+
         const typeText = async () => {
             if (startDelay > 0) {
                 await new Promise(r => setTimeout(r, startDelay));
             }
             if (!isMounted) return;
-            
+
             for (let i = 0; i <= text.length; i++) {
                 if (!isMounted) break;
                 setDisplayedText(text.slice(0, i));
                 await new Promise(r => setTimeout(r, speed + Math.random() * 20));
             }
         };
-        
+
         typeText();
-        
+
         return () => {
             isMounted = false;
             clearTimeout(timeout);
         };
     }, [text, startDelay, speed]);
-    
+
     return displayedText;
 }
 
@@ -53,8 +53,8 @@ const FieldRow = ({ label, value, confidence, warning, index }: any) => {
                     <ConfidenceBadge level={confidence} />
                 </div>
             </label>
-            <input 
-                type="text" 
+            <input
+                type="text"
                 value={typedValue}
                 readOnly
                 className={`w-full bg-slate-50 border ${warning ? 'border-amber-300 focus:border-amber-500' : 'border-slate-200 focus:border-orionBlue'} rounded-xl p-3.5 text-sm font-medium text-slate-800 focus:ring-1 ${warning ? 'focus:ring-amber-500' : 'focus:ring-orionBlue'} transition-all outline-none`}
@@ -92,10 +92,10 @@ const OcrHighlight = ({ top, left, width, height, label, color, delay }: any) =>
     };
 
     return (
-        <motion.div 
-            initial={{opacity: 0}} 
-            animate={{opacity: 1}} 
-            transition={{delay}} 
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay }}
             className={`absolute border-2 rounded animate-pulse cursor-pointer transition-all shadow-sm ${colorClasses[color] || colorClasses.emerald}`}
             style={{ top, left, width, height }}
         >
@@ -161,17 +161,16 @@ const Scene4Metadata: React.FC<SceneProps> = () => {
                     <div className="flex-1 bg-slate-100 p-8 overflow-y-auto no-scrollbar relative flex justify-center">
                         <div className="relative w-full max-w-[600px] shadow-sm border border-slate-200 rounded overflow-hidden bg-white">
                             <img src={mockupImg} alt="Metadata Document" className="w-full h-auto block" />
-                            
+
                             {/* Extracted Highlight Bounding Boxes */}
-                            <OcrHighlight top="38.5%" left="41%" width="40%" height="2%" color="emerald" label="Nama Data" delay={1.5} />
-                            <OcrHighlight top="41%" left="41%" width="10%" height="2%" color="purple" label="Kode" delay={1.7} />
-                            <OcrHighlight top="43.5%" left="41%" width="30%" height="2%" color="amber" label="Instansi" delay={1.9} />
-                            <OcrHighlight top="47.5%" left="41%" width="35%" height="2%" color="cyan" label="Nama DDP" delay={2.1} />
-                            <OcrHighlight top="56.5%" left="41%" width="10%" height="2%" color="pink" label="Tahun" delay={2.3} />
-                            <OcrHighlight top="74%" left="41%" width="45%" height="9%" color="orionBlue" label="Definisi" delay={2.5} />
-                            <OcrHighlight top="86%" left="41%" width="8%" height="2%" color="emerald" label="Ukuran" delay={2.7} />
-                            <OcrHighlight top="88.5%" left="41%" width="8%" height="2%" color="purple" label="Satuan" delay={2.9} />
-                            <OcrHighlight top="95.5%" left="41%" width="30%" height="2%" color="amber" label="Klasifikasi" delay={3.1} />
+                            <OcrHighlight top="31%" left="41%" width="40%" height="3%" color="emerald" label="Nama Data" delay={1.5} />
+                            <OcrHighlight top="35%" left="41%" width="5%" height="2%" color="purple" label="Kode" delay={1.7} />
+                            <OcrHighlight top="38%" left="41%" width="23%" height="2%" color="amber" label="Instansi" delay={1.9} />
+                            <OcrHighlight top="44%" left="41%" width="35%" height="3%" color="cyan" label="Nama DDP" delay={2.1} />
+                            <OcrHighlight top="55%" left="41%" width="6%" height="2%" color="pink" label="Tahun" delay={2.3} />
+                            <OcrHighlight top="74%" left="41%" width="50%" height="15%" color="orionBlue" label="Definisi" delay={2.5} />
+                            <OcrHighlight top="88%" left="41%" width="5%" height="2%" color="emerald" label="Ukuran" delay={2.7} />
+                            <OcrHighlight top="99%" left="41%" width="25%" height="2%" color="amber" label="Klasifikasi" delay={3.1} />
                         </div>
                     </div>
                 </div>
@@ -186,18 +185,18 @@ const Scene4Metadata: React.FC<SceneProps> = () => {
                         <FieldRow index={0} label="Nama Data" value={metadata.namaData} confidence="high" />
                         <FieldRow index={1} label="Nama Instansi" value={metadata.namaInstansi} confidence="medium" warning="Harmonized from 'BPN'" />
                         <FieldRow index={2} label="Kode Instansi" value={metadata.kodeInstansi} confidence="high" />
-                        
+
                         <div className="border-t border-slate-100 my-6"></div>
-                        
+
                         <FieldRow index={3} label="Nama DDP" value={metadata.namaDdp} confidence="high" />
                         <FieldRow index={4} label="Tahun Tersedia" value={metadata.tahunTersedia} confidence="high" />
-                        
+
                         <div className="space-y-2">
                             <label className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center justify-between">
                                 Definisi
                                 <ConfidenceBadge level="high" />
                             </label>
-                            <textarea 
+                            <textarea
                                 className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-sm text-slate-800 focus:border-orionBlue focus:ring-1 focus:ring-orionBlue transition-all outline-none resize-none font-medium"
                                 rows={3}
                                 value={typedDefinisi}
@@ -210,7 +209,7 @@ const Scene4Metadata: React.FC<SceneProps> = () => {
                             <FieldRow index={6} label="Satuan" value={metadata.satuan} confidence="high" />
                         </div>
                         <FieldRow index={7} label="Klasifikasi Penyajian" value={metadata.klasifikasiPenyajian} confidence="high" />
-                        
+
                         <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl mt-6">
                             <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Original Source Reference</p>
                             <a href={metadata.source} target="_blank" className="text-sm font-medium text-orionBlue hover:text-orionBlueDeep hover:underline break-all">
